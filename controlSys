@@ -68,10 +68,10 @@
     \centering
     {\large \textbf{Cooch Behar Government Engineering College}} \\[0.2cm]
     
-    \textbf{Md Hasibul Islam} \\[0.2cm]
+    \textbf{Arnab Dey} \\[0.2cm]
     
     \textit{Department of Electronics and Communication Engineering} \\[0.1cm]
-    Roll No - 34900322032 \\[0.1cm]
+    Roll No - 34900322036 \\[0.1cm]
     Subject - Control System \& Instrumentation \\[0.1cm]
     Subject Code - EC601(6637) \\[0.1cm]
     Group No - 06 \\[0.1cm]
@@ -107,29 +107,97 @@
 %    CONTENTS SLIDE
 %----------------------------------------------------------------------------------------
 
+\documentclass{}
 
-\section*{Contents}
-\begin{frame}{Contents}
-\renewcommand{\arraystretch}{1.1}
-\begin{tabular}{|c|l|c|}
-    \hline
-    \textbf{Sl. No.} & \textbf{Topic Name} & \textbf{Page No.} \\
-    \hline
-    1 & Introduction to Stability & 4 \\
-    2 & Types of Stability & 5 \\
-    3 & Mathematical Representation in S-Domain & 6 \\
-    4 & Poles and Stability in S-Domain & 7 \\
-    5 & Routh-Hurwitz Criterion – Concept \& Importance & 8 \\
-    6 & Routh-Hurwitz Tabulation Process & 9 \\
-    7 & Example of Routh-Hurwitz Criterion & 10 \\
-    8 & Special Cases in Routh-Hurwitz & 11 \\
-     9 & Impact on Stability  & 17 \\
-    10 & Graphical Representation of Stability & 18 \\
-    11 & Conclusion \& Applications & 25 \\
-    12 & Reference  & 26 \\
-    \hline
-\end{tabular}
+\begin{document}
+
+\section*{Table of Contents}
+
+% First Slide
+\begin{frame}{Table of Contents (1/2)}
+\begin{enumerate}
+    \item \textbf{Introduction to Stability}
+    \begin{itemize}
+        \item Definition and significance
+        \item Importance in control systems
+    \end{itemize}
+
+    \item \textbf{Types of Stability}
+    \begin{itemize}
+        \item Absolute Stability
+        \item Relative Stability
+        \item Marginal Stability
+    \end{itemize}
+
+    \item \textbf{Mathematical Representation in S-Domain}
+    \begin{itemize}
+        \item Transfer function representation
+        \item Characteristic equation
+    \end{itemize}
+
+    \item \textbf{Poles and Stability in S-Domain}
+    \begin{itemize}
+        \item Location of poles and system behavior
+        \item Relationship between pole positions and stability
+    \end{itemize}
+
+    \item \textbf{Routh-Hurwitz Criterion – Concept \& Importance}
+    \begin{itemize}
+        \item Concept of stability criteria
+        \item Importance in system analysis
+    \end{itemize}
+
+    \item \textbf{Routh-Hurwitz Tabulation Process}
+    \begin{itemize}
+        \item Step-by-step formulation
+        \item Condition checking
+    \end{itemize}
+\end{enumerate}
 \end{frame}
+
+% Second Slide
+\begin{frame}{Table of Contents (2/2)}
+\begin{enumerate}
+    \setcounter{enumi}{6} % Continue numbering from previous slide
+    \item \textbf{Example of Routh-Hurwitz Criterion}
+    \begin{itemize}
+        \item Solved numerical example
+        \item Interpretation of results
+    \end{itemize}
+
+    \item \textbf{Special Cases in Routh-Hurwitz}
+    \begin{itemize}
+        \item Zero-row condition
+        \item Presence of pure imaginary roots
+    \end{itemize}
+
+    \item \textbf{Impact on Stability}
+    \begin{itemize}
+        \item Effect of parameter variations
+        \item Impact on system response
+    \end{itemize}
+
+    \item \textbf{Graphical Representation of Stability}
+    \begin{itemize}
+        \item Root locus
+        \item Nyquist plots
+        \item Bode plots
+    \end{itemize}
+
+    \item \textbf{Conclusion \& Applications}
+    \begin{itemize}
+        \item Summary of key findings
+        \item Real-world applications of stability analysis
+    \end{itemize}
+
+    \item \textbf{References}
+    \begin{itemize}
+        \item Books, research papers, and online resources
+    \end{itemize}
+\end{enumerate}
+\end{frame}
+
+
 
 \begin{document}
 
