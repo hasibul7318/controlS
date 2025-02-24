@@ -1,0 +1,520 @@
+%----------------------------------------------------------------------------------------
+%    PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+\documentclass[10pt]{beamer}
+% \usepackage[utf8]{inputenc}
+% \usepackage{xeCJK}
+\usepackage{graphicx}
+\usepackage {mathtools}
+% \usepackage{utopia} %font utopia imported
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+
+% set colors
+\definecolor{myNewColorA}{RGB}{255,189,0}
+\definecolor{myNewcolorA}{RGB}{255,189,0}
+\definecolor{myNewcolorA}{RGB}{255,189,0}
+\setbeamercolor{block title}{bg=myNewColorA,fg=black}
+\setbeamercolor{block body}{bg=myNewColorA!20,fg=black}
+\setbeamercolor{block title alerted}{bg=black, fg=myNewColorA}
+\setbeamercolor{block body alerted}{bg=black!20, fg=black}
+
+\setbeamercolor*{block title example}{bg=myNewColorA, fg = black}
+\setbeamercolor*{block body example}{bg=myNewColorA!20, fg = black}
+\usebeamercolor[myNewColorA]{block title alerted}
+\setbeamercolor*{palette primary}{bg=myNewcolorA}
+\setbeamercolor*{palette secondary}{bg=myNewcolorA, fg = white}
+\setbeamercolor*{palette tertiary}{bg=myNewColorA, fg = white}
+\setbeamercolor*{titlelike}{fg=myNewColorA}
+\setbeamercolor*{title}{bg=myNewColorA}
+\setbeamercolor*{item}{fg=myNewColorA}
+\setbeamercolor*{caption name}{fg=myNewColorA}
+\usefonttheme{professionalfonts}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usetheme{SimplePlus}
+
+\usepackage{hyperref}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule, and \bottomrule in tables
+
+%----------------------------------------------------------------------------------------
+%    TITLE PAGE
+%----------------------------------------------------------------------------------------
+\documentclass{beamer}  % Beamer presentation class
+\usepackage{graphicx}    % For including images
+
+% Enable Slide Numbers
+\setbeamertemplate{footline}[frame number]
+
+\title{Cooch Behar Government Engineering College}
+\author{Md Hasibul Islam}
+\date{\today}
+
+\begin{document}
+
+% Title Slide (Image on Top, Text Below)
+\begin{frame}
+    
+\begin{center}
+    \href{https://cgec.org.in/}{} 
+    \includegraphics[width=0.2\linewidth]{CGEC-Logo-colorful.jpg}  % Small image at the top
+\end{center}
+    
+    \vspace{0.5cm}  % Space between image and text
+
+    \centering
+    {\large \textbf{Cooch Behar Government Engineering College}} \\[0.2cm]
+    
+    \textbf{Md Hasibul Islam} \\[0.2cm]
+    
+    \textit{Department of Electronics and Communication Engineering} \\[0.1cm]
+    Roll No - 34900322032 \\[0.1cm]
+    Subject - Control System \& Instrumentation \\[0.1cm]
+    Subject Code - EC601(6637) \\[0.1cm]
+    Group No - 06 \\[0.1cm]
+    Year - 3rd \\[0.1cm]
+    Semester - 6th \\[0.1cm]
+    Topic - CONCEPT OF STABILITY USING RH CRITERION AND S-DOMAIN
+\end{frame}
+\begin{frame}{Acknowledgment}
+    We sincerely express our gratitude to our instructors and mentors for their guidance and support throughout this project on \textbf{Concept of Stability Using Routh-Hurwitz Criterion and S-Domain}. Their insights have been invaluable in enhancing our understanding.
+    
+    \vspace{0.5cm}
+    We also acknowledge the efforts of our team members:
+    \begin{itemize}
+        \item \textbf{Md Hasibul Islam}
+        \item \textbf{Firdous Rahaman}
+        \item \textbf{Sruti Basu Roy Chowdhury}
+        \item \textbf{Debarpita Sarkar}
+        \item \textbf{Arnab Dey}
+        \item \textbf{Tonima Bagchi}
+    \end{itemize}
+    
+    Special thanks to academic resources and online platforms that supported our research.
+\end{frame}
+
+
+
+
+
+
+%------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%    CONTENTS SLIDE
+%----------------------------------------------------------------------------------------
+
+
+\section*{Contents}
+\begin{frame}{Contents}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{|c|l|c|}
+    \hline
+    \textbf{Sl. No.} & \textbf{Topic Name} & \textbf{Page No.} \\
+    \hline
+    1 & Introduction to Stability & 4 \\
+    2 & Types of Stability & 5 \\
+    3 & Mathematical Representation in S-Domain & 6 \\
+    4 & Poles and Stability in S-Domain & 7 \\
+    5 & Routh-Hurwitz Criterion – Concept \& Importance & 8 \\
+    6 & Routh-Hurwitz Tabulation Process & 9 \\
+    7 & Example of Routh-Hurwitz Criterion & 10 \\
+    8 & Special Cases in Routh-Hurwitz & 11 \\
+     9 & Impact on Stability  & 17 \\
+    10 & Graphical Representation of Stability & 18 \\
+    11 & Conclusion \& Applications & 25 \\
+    12 & Reference  & 26 \\
+    \hline
+\end{tabular}
+\end{frame}
+
+\begin{document}
+
+
+
+
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+
+
+% Introduction Slide
+\begin{frame}{1.Introduction to Stability}
+    \textbf{Definition:} Stability in control systems determines whether a system will return to its equilibrium state after a disturbance. A stable system ensures that its output remains predictable and does not diverge uncontrollably. Stability is a crucial factor in the design of control systems used in various engineering applications, including robotics, aerospace, and industrial automation.
+    
+    \vspace{0.5cm}
+    \textbf{Key Points:}
+    \begin{itemize}
+        \item A stable system produces bounded output for a bounded input.
+        \item Stability is essential for reliable system performance.
+        \item Methods like the Routh-Hurwitz Criterion, Root Locus, and Nyquist Plot help determine system stability.
+    \end{itemize}
+\end{frame}
+
+% Types of Stability Slide
+\begin{frame}{2.Types of Stability}
+    \begin{itemize}
+        \item \textbf{Absolute Stability:} occurs when a system remains stable under all conditions and parameter variations. Such systems always return to equilibrium after a disturbance and are crucial for critical applications like aircraft autopilots and medical devices.
+        \item \textbf{Marginal Stability:} refers to systems that oscillate indefinitely without converging to a steady state or diverging. This type of stability is often observed in undamped oscillatory systems, such as LC circuits, where energy is continuously exchanged between components without loss.
+        \item \textbf{Conditional Stability:} depends on specific parameter values, meaning a system can be stable for certain conditions but may become unstable if parameters change. This is common in feedback control systems where gain adjustments can alter stability behavior.
+    \end{itemize}
+\end{frame}
+
+% Mathematical Representation Slide
+\begin{frame}{3.Mathematical Representation in S-Domain}
+In control systems, the S-domain (Laplace domain) is widely used for analyzing system stability and performance. A system's behavior is represented using its transfer function, which is expressed as
+    - Transfer function: $ G(s) = \frac{N(s)}{D(s)} $
+    
+    - Stability depends on the location of poles (roots of $ D(s) $).
+    If all poles lie in the left half of the S-plane (negative real parts), the system is stable.
+If any pole has a positive real part, the system is unstable.
+If poles lie on the imaginary axis, the system exhibits marginal stability (oscillations without decay).
+The Routh-Hurwitz Criterion, Root Locus, and Nyquist Plot are commonly used methods to assess stability in the S-domain. This mathematical approach simplifies stability analysis without solving complex differential equations
+\end{frame}
+
+% Poles and Stability Slide
+\begin{frame}{4.Poles and Stability in S-Domain}
+    \begin{itemize}
+        \item \textbf{Stable System:} All poles have negative real parts (located in the left half of the S-plane). The system’s response gradually settles without oscillations growing.
+        \item \textbf{Unstable System:} At least one pole has a positive real part (right half of the S-plane), leading to an exponentially growing response and system instability.
+        \item \textbf{Marginally Stable System:}Poles lie exactly on the imaginary axis.
+    \end{itemize}
+\end{frame}
+
+% Routh-Hurwitz Criterion Slide
+\begin{frame}{5.Routh-Hurwitz Criterion – Concept & Importance}
+    \textbf{Definition:} The Routh-Hurwitz Criterion is a systematic method used to determine the stability of a control system without explicitly solving for the roots of its characteristic equation. It provides a direct way to assess how many poles of the system lie in the right half-plane (unstable region), left half-plane (stable region), or on the imaginary axis (marginal stability).
+    
+    \vspace{0.5cm}
+    \textbf{Importance:}
+    \begin{itemize}
+        \item Based on the characteristic equation $ D(s) = 0 $.
+        \item By analyzing the first column of the Routh array, the number of sign changes determines the number of poles in the right half-plane, indicating instability.
+        \item Quick Stability Assessment: Eliminates the need to compute the exact roots of the polynomial.
+Efficient for Higher-Order Systems: Suitable for complex systems where solving characteristic equations is difficult.
+Applicable to Control System Design: Helps engineers adjust parameters to achieve desired stability.
+    \end{itemize}
+\end{frame}
+
+% Routh-Hurwitz Tabulation Slide
+\begin{frame}{6.Routh-Hurwitz Tabulation Process}
+The Routh-Hurwitz Criterion determines system stability by constructing a Routh array from the characteristic equation. This step-by-step tabulation process helps analyze the number of unstable poles without explicitly solving for roots.
+    \begin{enumerate}
+        \item Form the characteristic equation.
+        \item Construct the Routh array.
+        \item Evaluate the number of sign changes in the first column to determine the number of unstable poles.
+    \end{enumerate}
+\end{frame}
+
+% Example Slide
+\begin{frame}{7.Example of Routh-Hurwitz Criterion}
+    For $ D(s) = s^3 + 5s^2 + 8s + 4 $, the Routh array is:
+    
+    \[
+    \begin{array}{c|cc}
+        s^3 & 1 & 8  \\
+        s^2 & 5 & 4  \\
+        s^1 & \frac{5 \times 8 - 1 \times 4}{5} & 0  \\
+        s^0 & 4 & -
+    \end{array}
+    \]
+    
+    Since there are no sign changes in the first column, the system is \textbf{stable}.
+\end{frame}
+
+% Special Cases Slide
+\begin{frame}{8.Special Cases in Routh-Hurwitz}
+While applying the Routh-Hurwitz Criterion, certain special cases arise that require additional techniques to determine system stability. These cases include:
+    \begin{itemize}
+        \item \textbf{Zero in the First Column:}  
+        - If the first element in any row becomes zero, it can cause division by zero in calculations.  
+        - This issue is resolved by replacing zero with a small positive number (epsilon) and continuing the process.  
+
+        \item \textbf{Entire Row of Zeros:}  
+        - If a row in the Routh array consists entirely of zeros, it indicates symmetrically located roots (pairs of poles on the imaginary axis).  
+        - To handle this case:  
+        \begin{itemize}
+            \item Use the row just above the zero row to form an auxiliary equation \( A(s) \).  
+            \item The auxiliary equation is derived using the coefficients of that row.  
+            \item Differentiate \( A(s) \) with respect to \( s \) to generate a new row, replacing the zero row.  
+            \item Continue the Routh array process as usual.  
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+\begin{frame}{}
+ 
+\begin{up}
+      \centering
+        \includegraphics[width=0.9\linewidth]{Screenshot 2025-02-22 230032.png}
+        \caption{}
+        \label{fig:upperlabel}
+\end{up}
+      
+\begin{up}
+      \centering
+        \includegraphics[width=0.7\linewidth]{Screenshot 2025-02-22 230911.png}
+        \caption{}
+        \label{fig:upperlabel}
+\end{up}
+      
+
+  \end{frame}
+\begin{frame}{}
+ 
+\begin{up}
+      \centering
+        \includegraphics[width=0.7\linewidth]{Screenshot 2025-02-22 231455.png}
+        \caption{}
+        \label{fig:upperlabel}
+\end{up}
+      
+\begin{up}
+      \centering
+        \includegraphics[width=0.7\linewidth]{Screenshot 2025-02-22 231616.png}
+        \caption{}
+        \label{fig:upperlabel}
+\end{up}
+      
+
+  \end{frame}
+\begin{frame}{}
+ 
+\begin{up}
+      \centering
+        \includegraphics[width=0.7\linewidth]{Screenshot 2025-02-22 231753.png}
+        \caption{}
+        \label{fig:upperlabel}
+\end{up}
+      
+\begin{up}
+      \centering
+        \includegraphics[width=0.7\linewidth]{Screenshot 2025-02-22 231854.png}
+        \caption{}
+        \label{fig:upperlabel}
+\end{up}
+      
+
+  \end{frame}
+  \begin{frame}{}
+ Step 3 − Verify the sufficient condition for the Routh-Hurwitz stability.
+There are two sign changes in the first column of Routh table. Hence, the control system is unstable.
+In the Routh-Hurwitz stability criterion, we can know whether the closed loop poles are in on left half of the ‘s’
+plane or on the right half of the ‘s’ plane or on an imaginary axis. So, we can’t find the nature of the control system.
+To overcome this limitation, there is a technique known as the root locus. We will discuss this technique in the
+next two chapters.
+\begin{up}
+      \centering
+        \includegraphics[width=0.8\linewidth]{Screenshot 2025-02-22 233213.png}
+        \caption{}
+        \label{fig:upperlabel}
+\end{up}
+      
+  \end{frame}
+  \begin{frame}{}
+
+\begin{up}
+      \centering
+        \includegraphics[width=0.8\linewidth]{Screenshot 2025-02-22 233239.png}
+        \caption{}
+        \label{fig:upperlabel}
+\end{up}
+\begin{up}
+      \centering
+        \includegraphics[width=0.8\linewidth]{Screenshot 2025-02-22 233257.png}
+        \caption{}
+        \label{fig:upperlabel}
+\end{up}
+      
+  \end{frame}
+\begin{frame}{9.Impact on Stability}
+    \textbf{Effect of Special Cases on Stability}  
+    \begin{itemize}
+        \item If the auxiliary equation has pure imaginary roots (e.g., \( \pm j\omega \)), the system is \textbf{marginally stable}.  
+        \item If the auxiliary equation has roots with positive real parts, the system is \textbf{unstable}.  
+        \item Proper handling of these cases ensures accurate stability analysis in control system design.
+    \end{itemize}
+\end{frame}
+
+% Graphical Representation Slide
+
+\setbeamertemplate{footline}[frame number]  % Enable slide numbers
+
+\begin{document}
+
+% Slide 1: Introduction to Graphical Representation of Stability
+\begin{frame}{10.Graphical Representation of Stability}
+    \begin{itemize}
+        \item \textbf{Root Locus:} Movement of poles with system gain.
+        \item \textbf{Nyquist Plot:} Stability based on encirclements of critical points.
+        \item \textbf{Bode Plot:} Frequency response analysis.
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    
+    \textbf{Example of Root Locus:}  
+    Draw the root locus diagram for a closed-loop system whose loop transfer function is:
+    
+    \[
+    G(s)H(s) = \frac{K}{s(s + 3)(s + 6)}
+    \]
+    
+    Step 1: Finding the Poles, Zeros, and Branches.
+    
+    - **Poles:** \( 0, -3, -6 \)  
+    - **Zeros:** None  
+    - Number of branches: \( P - Z = 3 - 0 = 3 \)  
+    - These branches go to infinity.
+\end{frame}
+
+% Slide 2: Asymptotes, Centroid, and Breakaway Point
+\begin{frame}{Root Locus Example - Step 2 & 3 & 4}
+    \textbf{Step 2: Angle of Asymptotes}
+    
+    \[
+    \theta = \frac{(2q + 1)180}{P - Z}, \quad q = 0,1,2
+    \]
+    
+    - \( q = 0, \quad \theta = 60^\circ \)  
+    - \( q = 1, \quad \theta = 180^\circ \)  
+    - \( q = 2, \quad \theta = 300^\circ \)  
+    
+    \vspace{0.4cm}
+    
+    \textbf{Step 3: Centroid Calculation}
+    
+    \[
+    \sigma = \frac{\sum \text{Real part of poles} - \sum \text{Real part of zeros}}{P-Z}
+    \]
+
+    \[
+    \sigma = \frac{0 - 3 - 6 - 0}{3} = -3
+    \]
+
+    \textbf{Step 4: Breakaway Point}
+    
+    - Solve \( 1 + G(s)H(s) = 0 \)
+    - Find valid breakaway point between \( 0 \) and \( -3 \).
+    - Using the quadratic formula:
+    
+    \[
+    s = \frac{-6 \pm \sqrt{36 - 24}}{2}
+    \]
+
+    - **Breakaway Point:** \( s = -1.268 \)
+\end{frame}
+
+% Slide 3: Root Locus Diagram and Intersection with Imaginary Axis
+\begin{frame}{Root Locus Example - Step 5 & }
+    \textbf{Step 5: Intersection with the Imaginary Axis}
+    
+    - Using Routh-Hurwitz Criteria on:
+    
+    \[
+    s^3 + 9s^2 + 18s + K = 0
+    \]
+    
+    - Solving for \( K \), we find:
+    
+    \[
+    K = 162, \quad s = \pm j4.242
+    \]
+
+    - These points lie on the imaginary axis.
+
+    \vspace{0.5cm}
+    
+    \begin{right}
+        \includegraphics[width=0.4\linewidth]{Root-locus-660.png}
+    \end{right}
+      \begin{left}
+        \includegraphics[width=0.4\linewidth]{Screenshot 2025-02-22 201134.png}
+    \end{left}
+    
+    \textbf{Step 6: No Complex Poles → No Angle of Departure Needed.}
+    
+    \textbf{Final Root Locus:} Combining all the steps above, we get the final root locus.
+\end{frame}
+
+
+\begin{frame}
+\begin{center}
+      
+\begin{figure}
+        \centering
+        \includegraphics[width=1.0\linewidth]{Screenshot 2025-02-22 215722.png}
+        \caption{Nyquist plot}
+        \label{fig:centre-label}
+    \end{figure}
+        \end{center}
+        \end{frame}
+  %  \textit{Figure: Example of Stability Analysis using Graphical Methods}
+  \begin{frame}
+\begin{center}
+      
+
+        \centering
+        \includegraphics[width=1.0\linewidth]{Screenshot 2025-02-22 221707.png}
+        \caption{}
+        \label{fig:centre-label}
+    
+        \end{center}
+  \end{frame}
+   \begin{frame}
+\begin{center}
+      
+
+        \centering
+        \includegraphics[width=1.0\linewidth]{Screenshot 2025-02-22 221726.png}
+        \caption{}
+        \label{fig:centre-label}
+    
+        \end{center}
+  \end{frame}
+   \begin{frame}
+        \centering
+        \includegraphics[width=1.0\linewidth]{Screenshot 2025-02-22 221741.png}
+        \caption{}
+        \label{fig:centre-label}
+   
+        \end{center}
+  \end{frame}
+% Conclusion Slide
+\begin{frame}{11.Conclusion & Applications}
+    \begin{itemize}
+        \item  \textbf{The concept of stability using the RH criterion and the S-domain is crucial in control systems. The RH criterion determines system stability by checking sign changes in the first column of the Routh array. If no sign changes occur, the system is stable; otherwise, it is unstable. The S-domain represents system behavior in the Laplace transform, where stability is ensured if all poles lie in the left half of the s-plane. These concepts help in designing stable controllers and ensuring proper system response.}.
+        \item Essential for designing \textbf{robust and reliable} control systems.
+    \end{itemize}
+\end{frame}
+\begin{frame}{12.References}
+    \begin{itemize}
+        \item K. Ogata, \textit{Modern Control Engineering}, Pearson Education.
+        \item B. C. Kuo, \textit{Automatic Control Systems}, McGraw-Hill.
+        \item Nagrath \\& Gopal, \textit{Control Systems Engineering}, New Age International.
+        \item Franklin, Powell \\& Emami-Naeini, \textit{Feedback Control of Dynamic Systems}, Pearson.
+        \item Online Resources:
+        \begin{itemize}
+            \item \href{https://vikramuniv.ac.in/files/wp-content/uploads/BE_EE_8thsem_CS_RH_stability_criterion_by_Kanchan_Thool.pdf}{Vikram University Ujjain }
+            \item \href{https://pressbooks.library.torontomu.ca/controlsystems/chapter/2-3stability-in-s-domain-the-routh-hurwitz-criterion-of-.}{PRESSBOOKS}
+            \item \href{https://www.scribd.com/presentation/341820615/Parta-Roth-Herwitz-Stability-Criterion}{Scribd}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Theme selection
+
+
+\begin{document}
+
+% Thank You Slide
+\begin{frame}
+    \centering
+    {\Huge \textbf{Thank You!}}
+\end{frame}
+
+
+\end{document}
