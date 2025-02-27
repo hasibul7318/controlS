@@ -40,7 +40,7 @@ try:
 
         time.sleep(0.1)  # Delay 100ms
 
-    led.value(1)  # Turn on blue LED when done ✅
+    led.value(1)  # Turn on blue LED when done 
 
 except KeyboardInterrupt:
     print("Logging stopped manually.")
