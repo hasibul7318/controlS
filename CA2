@@ -1,0 +1,538 @@
+\documentclass[conference]{IEEEtran}  % IEEE Conference Template
+\usepackage{graphicx}  % For images
+\usepackage{amsmath, amssymb}  % For mathematical symbols
+\usepackage{hyperref}  % For hyperlinks
+\usepackage{float}  % For figure placement
+\usepackage{listings}  % For code listings
+\usepackage{caption}
+\usepackage{subcaption}  % For subfigures
+\usepackage{tocbibind}  % To include TOC in PDF bookmarks
+\usepackage{blindtext}  % For dummy text
+%\usepackage{lineno}  % For line numbers
+%\linenumbers  % Enable line numbers
+
+\title{Open loop And Close loop with and without Controller}
+
+\author{
+    \IEEEauthorblockN{Md Hasibul Islam}
+    \IEEEauthorblockA{
+        Department of Electronics and Communication Engineering \\
+        Cooch Behar Government Engineering College \\
+        Email:islammdhasibul7318@gmail.com \\
+        Roll Number: 34900322032
+    }
+}
+
+\begin{document}
+% Cover Page
+\begin{titlepage}
+    \begin{center}
+        \Huge
+        \textbf{Open loop And Close loop with and without Controller}
+        
+        \vspace{1.5cm}
+        \LARGE
+        \textbf{CA 2}
+        
+        \vspace{2cm}
+        \textbf{Submitted by:}\\
+        \Large
+        Md Hasibul Islam (Roll No: 34900322032)\\
+       % Member 2 (Roll No: 654321)\\
+       % Member 3 (Roll No: 789012)
+        
+        \vspace{1.5cm}
+        \textbf{Under the guidance of:}\\
+        Mr. Rajib Das\\
+        Department of Electronics and Communication Engineering\\
+        CoochBehar Government Engineering College
+        
+         \vspace*{2cm}
+        
+        % Institution Logo
+        \includegraphics[width=0.3\textwidth]{logo.png}\\[1cm]
+        
+        \vfill
+        \textbf{Department of Electronics and Communication Engineering}\\
+        CoochBehar Government Engineering College\\
+        2025
+    \end{center}
+\end{titlepage}
+
+\maketitle
+
+\begin{abstract}
+Control systems play a crucial role in various engineering applications, ensuring stability, precision, and efficiency in automated processes. This project explores the differences between open-loop and closed-loop control systems, with and without controllers, to analyze their impact on system performance. Open-loop systems operate without feedback, making them simple but prone to disturbances and inaccuracies. In contrast, closed-loop systems incorporate feedback mechanisms to dynamically adjust and optimize performance. The study further examines the effectiveness of controllers, such as PID, in enhancing closed-loop system stability, reducing errors, and improving response time. Experimental results highlight the advantages and limitations of each approach, demonstrating how controllers significantly improve regulation and adaptability in real-world applications.
+\end{abstract}
+
+\begin{IEEEkeywords}
+PID Control, ESP32, Temperature Control, MicroPython, IoT, Heater
+\end{IEEEkeywords}
+
+\tableofcontents
+\listoffigures
+
+\section*{Acknowledgment}
+We would like to express our sincere gratitude to our faculty advisor, Rajib Das sir, for their invaluable guidance, encouragement, and continuous support throughout this project. Their expertise and insightful feedback have played a crucial role in shaping our understanding of control systems.
+
+We also extend our heartfelt appreciation to the ece for providing the necessary resources and a conducive learning environment to conduct our experiments successfully.
+
+A special thanks to our peers and colleagues for their collaboration and constructive discussions, which helped us refine our approach and improve the overall quality of this work.
+
+Lastly, we are grateful to our families and friends for their unwavering support and motivation throughout this journey.
+
+\section{Introduction}
+Introduction
+Control systems are essential in various engineering applications, enabling automation, efficiency, and precision. These systems are broadly classified into open-loop and closed-loop systems, each with distinct characteristics and applications.
+
+An open-loop system operates without feedback, meaning the output does not influence the input. These systems are simple, cost-effective, and easy to implement but lack accuracy and adaptability to external disturbances. Examples include washing machines, traffic light timers, and basic irrigation systems.
+
+In contrast, a closed-loop system incorporates feedback, where the system continuously monitors its output and adjusts its input accordingly to achieve the desired performance. Such systems provide higher accuracy, stability, and robustness against disturbances. Common examples include air conditioning systems, automatic voltage regulators, and robotic arms.
+
+To further enhance performance, controllers like PID (Proportional-Integral-Derivative) controllers are used in closed-loop systems. These controllers improve system response by minimizing errors, reducing overshoot, and ensuring stability. However, the effectiveness of a control system depends on factors such as response time, error correction, and system dynamics.
+
+This report aims to analyze and compare open-loop and closed-loop systems, both with and without controllers, highlighting their advantages, limitations, and real-world applications. Through theoretical analysis, experimental implementation, and performance evaluation, we seek to understand the significance of feedback and controllers in modern control systems.
+
+\subsection{Objectives}
+\begin{itemize}
+    \item 1. Understand the Fundamental Differences  
+   - Analyze the working principles of open-loop and closed-loop systems.  
+   - Identify their key advantages, limitations, and applications.
+    \item 2. Implement Open-Loop and Closed-Loop Systems  
+   - Design and simulate both open-loop and closed-loop control systems.  
+   - Compare system behavior with and without controllers. 
+    \item 3. Analyze System Performance  
+   - Evaluate response time, accuracy, stability, and efficiency.  
+   - Compare system performance in terms of overshoot, settling time, and steady-state error.
+\end{itemize}
+\section{ Open-Loop System}
+An open-loop system is a type of control system where the output has no influence or feedback on the input. These systems operate based on predefined inputs and do not adjust their operation based on external changes or disturbances.
+
+\subsection{Characteristics of Open-Loop Systems}
+No feedback mechanism
+Operates solely based on input commands
+Simple and cost-effective design
+Susceptible to external disturbances and inaccuracies
+
+\subsection{Examples of Open-Loop Systems}
+1.Washing Machine – Follows a fixed washing cycle regardless of the dirt level.
+2.Traffic Light System – Changes lights at preset time intervals without sensing traffic flow.
+3.Electric Kettle – Heats water for a set duration instead of checking temperature
+
+\subsection{Advantages of Open-Loop Systems}
+Easy to design and implement
+Cost-efficient due to minimal components
+Requires less computational power
+
+\subsection{Disadvantages of Open-Loop Systems}
+Cannot correct errors or adapt to changing conditions
+Less accurate compared to closed-loop systems
+Prone to performance variations due to external disturbances
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{instrumentationtools.com_open-vs-closed-loop.jpg}
+    \caption{open and closed loop}
+    \label{fig:hardware}
+\end{figure}
+
+\section{Closed loop System}
+\subsection{Examples of Closed-Loop Systems}
+Washing Machine with Sensors – Adjusts the washing cycle based on dirt level detected by sensors.
+Smart Traffic Light System – Uses cameras or sensors to adjust signal timings based on real-time traffic flow.
+Thermostat-Controlled Electric Kettle – Stops heating when the desired temperature is reached.
+\subsection{Advantages of Closed-Loop Systems}
+Self-Correcting: Adjusts output dynamically based on feedback.
+Higher Accuracy: More precise performance due to error correction.
+Adaptability: Can handle varying external conditions effectively.
+\subsection{Disadvantages of Closed-Loop Systems}
+Complex Design: Requires sensors, controllers, and feedback mechanisms.
+Higher Cost: More components lead to increased expense.
+Computational Load: Needs processing power for continuous adjustments.
+\section{Need for Controllers}
+In both open-loop and closed-loop systems, controllers play a crucial role in improving performance, stability, and accuracy. A controller is a device or algorithm that processes input signals, compares them with the desired setpoint, and generates an appropriate control action to achieve the desired output.
+
+\subsection{Why Are Controllers Needed?}
+Error Minimization – Controllers help reduce the difference between the desired and actual output.
+Improved Stability – They prevent excessive fluctuations and oscillations in system response.
+Faster Response Time – Controllers ensure that systems reach their desired state quickly.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{51FzgrVl-cL.jpg}
+    \caption{ESP 32 Micro Controller}
+    \label{fig:hardware}
+\end{figure}
+
+%\subsection{Software Implementation}
+ompensation for Disturbances – They adjust system behavior in real-time to counteract external influences.
+Energy Efficiency – Optimized control actions reduce unnecessary power consumption.
+Automation & Precision – Controllers enable accurate and automated operations, reducing the need for manual adjustments
+
+\subsubsection{Types of Controllers}
+Proportional (P) Controller – Provides a control action proportional to the error.
+Proportional-Integral (PI) Controller – Eliminates steady-state error by integrating past errors.
+Proportional-Integral-Derivative (PID) Controller – Predicts future errors and improves response stability.
+On-Off Controller – A simple binary control mechanism used in basic systems like thermostats.
+%\begin{equation}
+ %   u(t) = K_p e(t) + K_i \int e(t) dt + K_d \frac{de(t)}{dt}
+%\end{equation}
+%where:
+%- \( K_p \) is the proportional gain,
+%- \( K_i \) is the integral gain,
+%- \( K_d \) is the derivative gain,
+%- \( e(t) \) is the error signal.
+\subsubsection{Applications of Controllers}
+Industrial Automation – Regulating motor speed, conveyor belts, and robotic arms.
+Home Appliances – Temperature control in ACs, refrigerators, and water heaters.
+Automotive Systems – Cruise control, fuel injection, and braking systems.
+Medical Equipment – Infusion pumps, ventilators, and heart rate monitors.
+\section{System Design and Implementation}
+
+\subsection{Open-Loop System without Controller}
+
+An \textbf{open-loop system without a controller} operates without feedback or any form of self-correction. The system executes pre-programmed instructions without considering changes in external conditions.
+
+\subsubsection{Working Principle}
+\begin{itemize}
+    \item The system takes an input and produces an output based on a fixed mechanism.
+    \item There is no real-time monitoring or feedback to adjust the output.
+    \item Performance depends on predefined settings rather than actual conditions.
+\end{itemize}
+
+\subsubsection{Examples}
+\begin{itemize}
+    \item \textbf{Electric Fan at Fixed Speed} – Runs at a constant speed without adjusting for room temperature.
+    \item \textbf{Irrigation System on a Timer} – Waters plants for a set duration without checking soil moisture.
+    \item \textbf{Basic Room Heater} – Operates for a fixed time instead of adjusting based on temperature.
+\end{itemize}
+
+\subsubsection{Advantages}
+\begin{itemize}
+    \item \checkmark Simple and easy to implement.
+    \item \checkmark Cost-effective due to minimal components.
+    \item \checkmark Fast response since no feedback processing is needed.
+\end{itemize}
+
+\subsubsection{Disadvantages}
+\begin{itemize}
+    \item \texttimes Cannot adapt to environmental changes.
+    \item \texttimes No error correction, leading to inefficiencies.
+    \item \texttimes Performance varies due to external disturbances.
+\end{itemize}
+\subsection{Open-Loop System with Controller}
+
+An \textbf{open-loop system with a controller} operates using a predefined control mechanism but still lacks feedback. The controller processes the input signal and adjusts the system output based on predefined settings, without real-time correction.
+
+\subsubsection{Working Principle}
+\begin{itemize}
+    \item The system includes a controller that processes the input before sending it to the actuator.
+    \item The control action is based on predefined parameters and does not adjust based on the output.
+    \item The system cannot self-correct errors or respond to environmental variations.
+\end{itemize}
+
+\subsubsection{Examples}
+\begin{itemize}
+    \item \textbf{Washing Machine with Timer} – A microcontroller controls washing cycles based on a fixed program.
+    \item \textbf{Automatic Water Sprinkler} – A controller activates the sprinklers at a specific time, regardless of soil moisture.
+    \item \textbf{Conveyor Belt System} – Moves items at a fixed speed without adjusting for load variations.
+\end{itemize}
+
+\subsubsection{Advantages}
+\begin{itemize}
+    \item \checkmark More precise than a basic open-loop system.
+    \item \checkmark Can automate processes based on predefined logic.
+    \item \checkmark Easier to implement than a closed-loop system.
+\end{itemize}
+
+\subsubsection{Disadvantages}
+\begin{itemize}
+    \item \texttimes Still cannot correct errors or respond to changes in conditions.
+    \item \texttimes Inefficiencies if external factors affect the process.
+    \item \texttimes May require manual adjustments for changing environments.
+\end{itemize}
+\subsection{Closed-Loop System without Controller}
+
+A \textbf{closed-loop system without a controller} is a system where feedback exists, but no dedicated controller processes the feedback to adjust the system's behavior. The system relies on inherent properties to maintain stability without advanced control mechanisms.
+
+\subsubsection{Working Principle}
+\begin{itemize}
+    \item The system consists of an input, a process, an output, and a feedback mechanism.
+    \item The feedback signal is used to influence the input or the process, but without an active controller.
+    \item The system may rely on mechanical or passive feedback elements for self-regulation.
+\end{itemize}
+
+\subsubsection{Examples}
+\begin{itemize}
+    \item \textbf{Toilet Flush System} – The water tank refills automatically based on a float valve mechanism.
+    \item \textbf{Thermal Expansion Valve in Refrigeration} – Adjusts refrigerant flow based on temperature changes without an electronic controller.
+    \item \textbf{Pendulum Clock} – Maintains time accuracy through mechanical feedback from the swinging pendulum.
+\end{itemize}
+
+\subsubsection{Advantages}
+\begin{itemize}
+    \item \checkmark Provides basic self-regulation without the need for complex electronics.
+    \item \checkmark More stable than open-loop systems due to feedback.
+    \item \checkmark Lower cost compared to closed-loop systems with active controllers.
+
+\subsection{Closed-Loop System with Controller}
+
+ \textbf{closed-loop system with a controller} is an advanced control system where feedback is actively processed by a controller to achieve the desired output with high accuracy and stability. The controller continuously adjusts the system’s input based on feedback to minimize errors.
+
+\subsubsection{Working Principle}
+\begin{itemize}
+    \item The system consists of an input, a process, an output, a feedback mechanism, and a controller.
+    \item The controller compares the actual output with the desired setpoint and generates corrective actions.
+    \item Controllers can be simple (e.g., On-Off control) or advanced (e.g., PID controllers).
+\end{itemize}
+
+\subsubsection{Examples}
+\begin{itemize}
+    \item \textbf{Air Conditioner with Thermostat} – The thermostat regulates temperature by adjusting the compressor speed.
+    \item \textbf{Cruise Control in Cars} – The system adjusts throttle based on speed feedback to maintain a constant velocity.
+    \item \textbf{Automatic Voltage Regulator (AVR)} – Regulates voltage in power systems to ensure stable electrical output.
+\end{itemize}
+
+\subsubsection{Advantages}
+\begin{itemize}
+    \item \checkmark High accuracy and adaptability to dynamic conditions.
+    \item \checkmark Can correct errors in real-time for improved performance.
+    \item \checkmark Reduces energy wastage by optimizing system behavior.
+\end{itemize}
+
+\subsubsection{Disadvantages}
+\begin{itemize}
+    \item \texttimes More complex and expensive due to additional sensors and controllers.
+    \item \texttimes Requires tuning and calibration for optimal performance.
+    \item \texttimes May introduce delays due to processing time of the controller.
+\end{itemize}
+\section{Comparative Analysis}
+
+This section provides a comparative study of different system types based on key performance metrics, including response time, error and accuracy, and stability.
+
+\subsection{Response Time Comparison}
+The response time of a system determines how quickly it reacts to changes in input. Faster response times indicate better adaptability.
+
+\subsubsection{Open-Loop System}
+\begin{itemize}
+    \item Fixed response time as there is no feedback mechanism.
+    \item Executes pre-defined actions regardless of environmental changes.
+    \item Example: Traffic lights follow a fixed schedule without monitoring real-time traffic flow.
+\end{itemize}
+
+\subsubsection{Closed-Loop System Without Controller}
+\begin{itemize}
+    \item Slight improvement in response time due to feedback presence.
+    \item The system self-adjusts but lacks optimized control.
+    \item Example: A pendulum clock with a mechanical adjustment mechanism.
+\end{itemize}
+
+\subsubsection{Open-Loop System With Controller}
+\begin{itemize}
+    \item The controller optimizes predefined responses.
+    \item Still lacks dynamic real-time feedback adjustments.
+    \item Example: A thermostat operating on a time-based schedule instead of real temperature readings.
+\end{itemize}
+
+\subsubsection{Closed-Loop System With Controller}
+\begin{itemize}
+    \item Fastest and most adaptive response due to real-time feedback processing.
+    \item Adjusts dynamically to reach the desired output with minimal delay.
+    \item Example: An air conditioning system that continuously adjusts cooling based on room temperature.
+\end{itemize}
+
+\subsection{Error and Accuracy Analysis}
+Error measurement defines how closely the system output matches the desired output. Accuracy is essential for control applications.
+
+\subsubsection{Open-Loop System}
+\begin{itemize}
+    \item Higher error due to lack of correction mechanisms.
+    \item Prone to environmental disturbances.
+    \item Example: A manually controlled water sprinkler system.
+\end{itemize}
+
+\subsubsection{Closed-Loop System Without Controller}
+\begin{itemize}
+    \item Error is reduced due to feedback presence.
+    \item The system can self-correct to some extent.
+    \item Example: A mechanical float valve in a water tank regulating water level.
+\end{itemize}
+
+\subsubsection{Open-Loop System With Controller}
+\begin{itemize}
+    \item Error reduction using pre-set control logic.
+    \item Still lacks continuous dynamic adjustments.
+    \item Example: A washing machine adjusting cycle time based on estimated load weight.
+\end{itemize}
+\subsubsection{Closed-Loop System With Controller}
+\begin{itemize}
+    \item Lowest error due to continuous feedback-driven corrections.
+    \item High precision in maintaining the desired output.
+    \item Example: A robotic arm in manufacturing adjusting its position based on real-time sensor data.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{download.png}
+    \caption{Comparative Analysis of System Performance}
+    \label{fig:comparative_analysis}
+\end{figure}
+
+
+\subsection{Stability and Overshoot Characteristics}
+System stability refers to its ability to maintain a steady state, while overshoot measures excessive deviation from the target before settling.
+
+\subsubsection{Open-Loop System}
+\begin{itemize}
+    \item Stability depends on fixed input conditions.
+    \item Susceptible to large overshoot due to lack of corrections.
+    \item Example: A manually operated gas stove where heat control is purely guesswork.
+\end{itemize}
+
+\subsubsection{Closed-Loop System Without Controller}
+\begin{itemize}
+    \item Stability is improved through feedback but lacks precision.
+    \item Some overshoot may still occur due to delayed corrections.
+    \item Example: A wind turbine adjusting blade angles based on wind resistance.
+\end{itemize}
+
+\subsubsection{Open-Loop System With Controller}
+\begin{itemize}
+    \item Pre-programmed stability control enhances performance.
+    \item Overshoot is reduced but not eliminated.
+    \item Example: A scheduled irrigation system ensuring water supply but not adjusting to soil conditions.
+\end{itemize}
+
+\subsubsection{Closed-Loop System With Controller}
+\begin{itemize}
+    \item Most stable system with minimal overshoot.
+    \item Dynamic corrections ensure steady-state accuracy.
+    \item Example: A PID-controlled motor drive adjusting speed based on real-time feedback.
+\end{itemize}
+
+\section{Experimental Setup and Testing}
+
+\subsection{Hardware and Circuit Design}
+The experimental setup includes essential hardware components such as microcontrollers, sensors, actuators, and power circuits. The circuit design is carefully structured to ensure proper connectivity and functionality. Key components include:
+
+\begin{itemize}
+    \item Microcontroller (ESP32, Arduino, or equivalent)
+    \item Sensors (Temperature, Pressure, etc.)
+    \item Actuators (Motors, Relays)
+    \item Power Supply and Protection Circuits
+\end{itemize}
+
+A detailed circuit diagram is provided in Figure~\ref{fig:circuit_diagram}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{circuit.jpg}
+    \caption{Circuit Diagram of the Experimental Setup}
+    \label{fig:circuit_diagram}
+\end{figure}
+
+\subsection{Software Implementation}
+The software implementation consists of programming the microcontroller for data acquisition, processing, and control. The key software functionalities include:
+
+\begin{itemize}
+    \item Sensor data acquisition and filtering
+    \item Implementation of control algorithms (Open-loop, Closed-loop)
+    \item Real-time monitoring and logging
+    \item Communication with cloud services (if applicable)
+\end{itemize}
+
+The firmware is developed using languages such as **MicroPython, .
+
+\subsection{Data Collection and Analysis}
+To evaluate system performance, data is collected in real-time and analyzed based on key performance metrics:
+
+\begin{itemize}
+    \item Response Time
+    \item Accuracy and Error Analysis
+    \item Stability and Overshoot Characteristics
+\end{itemize}
+
+The collected data is visualized using plots, graphs, and comparison tables.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{RC Charging Plot using ESP32.png}
+    \caption{Graphical Analysis of System Performance}
+    \label{fig:data_analysis}
+\end{figure}
+
+\section{Results and Discussion}
+
+\subsection{Performance of Open-Loop Systems}
+Open-loop systems were tested under various operating conditions to evaluate their performance. Key observations include:
+
+\begin{itemize}
+    \item The system followed predefined instructions without feedback.
+    \item Performance was stable in ideal conditions but showed deviations due to external disturbances.
+    \item Lack of adaptability resulted in errors when environmental conditions changed.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{imgi.jpg}
+    \caption{Performance Analysis of Open-Loop System}
+    \label{fig:open_loop_performance}
+\end{figure}
+
+\subsection{Performance of Closed-Loop Systems}
+Closed-loop systems were tested to assess their adaptability and precision. Observations include:
+
+\begin{itemize}
+    \item The system successfully adjusted to environmental changes using feedback.
+    \item Error correction significantly improved accuracy.
+    \item Stability was achieved, reducing overshoot and oscillations.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{  sys14.webp }
+    \caption{Performance Analysis of Closed-Loop System}
+    \label{fig:closed_loop_performance}
+\end{figure}
+
+\subsection{Impact of Controllers}
+The introduction of controllers, such as PID, significantly enhanced system performance. The main impacts observed were:
+
+\begin{itemize}
+    \item Faster response time with reduced settling time.
+    \item Higher accuracy in achieving the desired setpoint.
+    \item Improved stability with minimal overshoot.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{something.png}
+    \caption{Effect of Controllers on System Performance}
+    \label{fig:controller_impact}
+\end{figure}
+\section{Conclusion and Future Work}
+
+\subsection{Summary of Findings}
+This study analyzed the performance of open-loop and closed-loop systems, both with and without controllers. Key findings include:
+
+\begin{itemize}
+    \item Open-loop systems operate without feedback, making them simple but prone to inaccuracies due to external disturbances.
+    \item Closed-loop systems significantly improve accuracy and stability by utilizing feedback mechanisms.
+    \item The implementation of controllers, such as PID, enhances system response, reducing error and improving overall efficiency.
+    \item Comparative analysis showed that closed-loop systems with controllers outperformed all other configurations in terms of stability, response time, and error minimization.
+\end{itemize}
+
+\subsection{Future Enhancements and Applications}
+To further enhance system performance and adaptability, the following improvements are suggested:
+
+\begin{itemize}
+    \item \textbf{Advanced Control Strategies:} Implementing modern techniques like Fuzzy Logic Control (FLC), Neural Network-based controllers, and PSO-PID (Particle Swarm Optimization-PID) for better adaptability.
+    \item \textbf{Self-Tuning Controllers:} Developing AI-driven controllers that can dynamically adjust parameters based on real-time data.
+    \item \textbf{Cloud-Based Monitoring:} Integrating IoT-based remote monitoring and control for real-time data analysis and predictive maintenance.
+    \item \textbf{Application Expansion:} Extending the use of closed-loop systems with controllers in industrial automation, robotics, and smart home applications.
+\end{itemize}
+
+These enhancements will further optimize system performance and broaden the practical applications of controlled feedback mechanisms.
+
+
+
+
+\end{document}
