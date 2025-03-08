@@ -1,0 +1,545 @@
+\documentclass[conference]{IEEEtran}  % IEEE Conference Template
+\usepackage{graphicx}  % For images
+\usepackage{amsmath, amssymb}  % For mathematical symbols
+\usepackage{hyperref}  % For hyperlinks
+\usepackage{float}  % For figure placement
+\usepackage{listings}  % For code listings
+\usepackage{caption}
+\usepackage{subcaption}  % For subfigures
+\usepackage{tocbibind}  % To include TOC in PDF bookmarks
+\usepackage{blindtext}  % For dummy text
+%\usepackage{lineno}  % For line numbers
+%\linenumbers  % Enable line numbers
+
+\title{Software Simulation to Control a Servo Motor and RC Transient Analysis using ESP32}
+
+\author{
+    \IEEEauthorblockN{PALLAB ACHARJEE 
+, ARNAB KUMAR GHOSH
+, ROHAN KUMAR BHOWMICK, ARNAB DEY, NABADIPTA ROY, BASUDEB KARMAKAR, ANUPAM BISWAS, NIPA KUNDU, PRITAM DAS, PROSENJIT BISWAS, RABINDRA NATH BEPARI, SYED SUFI ATEEQUR RAHMAN
+
+}
+    \IEEEauthorblockA{
+        Department of Electronics and Communication Engineering \\
+        CoochBehar Government Engineering College \\
+        Roll Number: 34900322032, 34900322054, 34900322049, 34900322053, 34900322038, 34900322034, 34900323022, 34900323013, 34900323037, 34900323044
+    }
+}
+
+\begin{document}
+% Cover Page
+\begin{titlepage}
+    \begin{center}
+        \Huge
+        \textbf{Software Simulation to Control a Servo Motor and RC Transient Analysis using ESP32}
+        
+        \vspace{0.5cm}
+        \LARGE
+        \textbf{Laboratory Project Report\\(PCA-1)}
+        
+        \vspace{0.5cm}
+        \textbf{Submitted by:}\\
+        \Large
+        MD HASIBUL ISLAM (Roll No: 34900322032)\\
+        Buddhadeb Sarkar (34900322054)\\
+        Susmita Gayen (34900322049)\\
+        PRITAM ADHIKARY (34900322053)\\
+        Aratrika Das (34900322038)\\
+        Sruti Basu Roy Chowdhury (34900322034)\\
+        SAHARIYAR CHOWDHURY (34900321022)\\
+        Garima Sinhamahapatra (34900322013)\\
+        Tonima Bagchi (34900322037)\\
+        MALAY PATRA (34900322044)\\
+       
+        
+        \vspace{0.9cm}
+        \textbf{Under the guidance of:}\\
+        Mr. Rajib Das\\
+        Department of Electronics and Communication Engineering\\
+        Cooch Behar Government Engineering College
+        
+      \vspace*{0.5cm}
+        
+        % Institution Logo
+        \includegraphics[width=0.3\textwidth]{logo.png}\\[0.6cm]
+        
+        %\vfill
+        \textbf{Department of Electronics and Communication Engineering}\\
+        Cooch Behar Government Engineering College\\
+        2025
+    \end{center}
+\end{titlepage}
+
+\maketitle
+
+\begin{abstract}
+This report presents a simulation study on the control of a servo motor using an ESP32 microcontroller. The simulation aims to demonstrate the feasibility and effectiveness of using ESP32 for servo motor control, highlighting its potential applications in robotics, automation, and IoT systems.
+\end{abstract}
+
+\begin{IEEEkeywords}
+ESP32, Open Loop System, python, Controling Servo Motor, Rotary Encoder, MicroPython, IoT .
+\end{IEEEkeywords}
+
+\tableofcontents
+\listoffigures
+
+\section*{Acknowledgment}
+We would like to express our sincere gratitude to our faculty advisor, Mr. Rajib Das sir, Assistant Professor, Department of Electronics and Communications for his valuable guidance and support throughout this project. We also thank our institution for providing the necessary resources and facilities.
+
+\section{\textbf{servo motor}}
+
+\subsection{Introduction}
+The ESP32 microcontroller offers a powerful and versatile platform for controlling servo motors, enabling precise positioning and motion control in various applications, including robotics, automation, and IoT systems, with its built-in WiFi, Bluetooth, and hardware PWM capabilities.
+
+\subsubsection{Objectives}
+\begin{itemize}
+    \item Learn to Implement an Open Loop Control System in real life application.
+     \item Lean to use Simulation Softwares before hardware implementation
+     \item Learn to build the circuit and write the microPython into ESP32
+\end{itemize}
+
+\subsection{System Design and Implementation}
+
+This section details the hardware and software components of the Servo Motor control system. The design approach, choice of components, and implementation steps are explained in the following subsections.\\
+
+\subsubsection{Hardware Components\\}
+
+
+The system consists of several hardware components that work together to measure, process, and control Servo Motor.
+These components include:\\
+
+\subsubsubsection{  i. ESP32 Microcontroller: }\\
+The ESP32 is chosen as the central processing unit due to its dual-core processor, built- in Wi-Fi and Bluetooth connectivity, and extensive GPIO capabilities. It enables real-time processing of sensor data and implementation of control algorithms.\\
+
+\subsubsubsection{  ii. M274 Rotary Encoder:}\\
+The M274 rotary encoder is an electromechanical device that reads the position of a rotating component, such as a motor shaft, and generates an electrical output signal related to that position. Magnetic rotary encoders use a magnetized wheel attached to the shaft.\\
+
+\subsubsubsection{  iii. OLED Display: }\\
+An OLED display is used to provide real-time feedback, showing current position of Servo Motor,
+setpoint values, and system status. It improves user interaction and monitoring.\\
+
+\subsubsubsection{  iv. MG90S Servo Motor:}\\
+A servo motor is an electro-mechanical device that produces torque and velocity based on the
+supplied current and voltage. It takes encoded digital signal and set its position according to it.\\
+
+
+
+\subsubsection{Software Implementation}
+The software implementation includes writing and executing the Servo Motor control algorithm, taking Position readings from Rotary Encoder and displaying them on OLED Display for remote monitoring.\\
+The control algorithm is implemented in microPython  code. We are using www.wokwi.com for simulation. The required libraries and the main algorithm code is first given to the code editor and then the circuit diagram is made to simulate the code.
+
+\subsubsubsection{i. Control Algorithm in MicroPython: }\\
+The control algorithm calculates the position from the signal taken from the Rotary Encoder. According to this position, the algorithm sets the position of the Servo Motor. Also this algorithm displays the position in OLED Display. Also there is an Push Button to initialise the position of Servo Motor.\\
+
+The followings are the steps of the algorithm :
+\begin{itemsize}
+    \item \textbf{1) Read Position Data From User:} The ESP32 reads position data as electrical signal from user using the M274 Rotary Encoder.
+    \item \textbf{2) Calculate the Position:} The microPython code computes the position and the ESP32 sets the position of the Servo Motor in terms of angle.
+    \item \textbf{3) Display the calculated Position:} ESP32 displays the calculated position on OLED display by using the library "ssd1306.py".
+\end{itemsize}\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Screenshot 2025-03-08 151122.png}
+    \caption{(Circuit Diagram for Servo Motor)}
+    \label{Diagram}
+\end{figure}
+
+
+\subsubsubsection{\textbf{ii. MicroPython Program: }}\\
+
+\begin{verbatim}
+import machine
+import time
+import ssd1306  # OLED Display Driver
+
+# Rotary Encoder Pins
+CLK = machine.Pin(18, machine.Pin.IN,
+machine.Pin.PULL_UP)
+DT = machine.Pin(19, machine.Pin.IN,
+machine.Pin.PULL_UP)
+
+# Push-Button for Reset
+reset_button = machine.Pin(21, machine.
+Pin.IN,machine.Pin.PULL_UP)
+
+# Servo Motor (PWM on GPIO 4)
+servo = machine.PWM(machine.Pin(4),
+freq=50)
+
+# I2C OLED Display (SSD1306)
+i2c = machine.I2C(0, scl=machine.Pin(22),
+sda=machine.Pin(23))  # Adjust pins if needed
+oled = ssd1306.SSD1306_I2C(128, 64, i2c)
+
+# Servo Angle Variable
+counter = 90  # Start at 90° (middle position)
+previousStateCLK = CLK.value()
+
+# Function to set servo angle
+def set_servo_angle(angle):
+    duty = int((angle / 180) * 102 + 26)  
+    
+#Convert angle (0-180) to PWM duty cycle
+    servo.duty(duty)
+    print("Servo Position:", angle)
+    update_oled(angle)  # Update display
+
+# Function to update OLED Display
+def update_oled(angle):
+    oled.fill(0)  # Clear display
+    oled.text("Servo Position:", 10, 10)
+    oled.text(str(angle) + " deg", 40, 45)
+    oled.show()
+
+# Set initial position
+set_servo_angle(counter)
+
+while True:
+    currentStateCLK = CLK.value()
+
+    # Check for rotation (detect falling 
+edge of CLK)
+    if currentStateCLK == 0 and 
+previousStateCLK == 1:  
+        if DT.value() == 1:  
+            counter = min(180, counter + 1)
+            # Clockwise
+            print("Clockwise Rotation ⏩")
+        else:
+            counter = max(0, counter - 1)
+          # Counterclockwise
+            print("Counterclockwise Rotation ⏪")
+        
+        set_servo_angle(counter)
+        # Move the servo
+
+    # Reset Servo to 90° when button is pressed
+    if reset_button.value() == 0:
+        counter = 90
+        set_servo_angle(counter)
+        print("Servo Reset to 90° ��")
+        
+        # Show Reset Message on OLED
+        oled.fill(0)
+        oled.text("RESET", 50, 30)
+        oled.show()
+        time.sleep(1)
+        # Pause for reset display
+
+    previousStateCLK = currentStateCLK  
+    # Update state
+    time.sleep(0.005)
+    # Small delay for stability
+\end{verbatim}
+\textbf{• Results}\\
+
+\subsection{Results and Discussion}\\\\
+\textbf{• Results}\\
+
+
+The experiment successfully demonstrated the control of a servo motor using a rotary encoder and a push button as input devices, with the ESP32 microcontroller as the brain of the system. The results are summarized as follows:
+
+- The rotary encoder was able to accurately track the rotation of the encoder shaft, and the ESP32 was able to read the encoder position and update the OLED display accordingly.
+- The servo motor was able to accurately position itself based on the encoder position, demonstrating a smooth and precise control.
+- The push button was able to successfully initialize the servo motor position to its default state.\\\\
+
+\textbf{• Discussion}\\
+
+The results of the experiment demonstrate the feasibility of using a rotary encoder and a push button as input devices for controlling a servo motor using an ESP32 microcontroller. The system showed good accuracy and precision in tracking the encoder position and controlling the servo motor.
+
+The use of a rotary encoder as an input device provides a high degree of precision and accuracy, making it suitable for applications where precise control is required. The push button provides a simple and intuitive way to initialize the servo motor position.
+
+The ESP32 microcontroller proved to be a capable and versatile platform for controlling the servo motor and reading the encoder position. The OLED display provided a convenient way to visualize the encoder position and servo motor state.
+
+Overall, the experiment demonstrates the potential of using ESP32-based systems for precise control applications, and highlights the importance of careful system design and calibration to achieve accurate and reliable results.
+
+\subsection{Future Work}
+
+Future work could involve exploring the use of more advanced control algorithms, such as PID control, to improve the accuracy and stability of the system. Additionally, the system could be expanded to include more input devices, such as sensors or cameras, to enable more complex and autonomous behaviors.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{123.jpg}
+    \caption{(hardware)}
+    \label{Diagram}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{234.jpg}
+    \caption{(result)}
+    \label{Diagram}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{345.jpg}
+    \caption{(view)}
+    \label{Diagram}
+\end{figure}
+
+
+\section{\textit{RC Circuit Response Through ESP32}}
+
+\subsection{Introduction}
+The RC circuit, consisting of a resistor (R) and a capacitor (C), is a fundamental building block in electronic circuits. Understanding the response of an RC circuit is crucial in various fields, including electronics, electrical engineering, and telecommunications.\\
+
+The response of an RC circuit is characterized by its transient behavior, which describes how the voltage across the capacitor changes over time when a voltage source is applied or removed. Analyzing the RC circuit response is essential for designing and optimizing various electronic systems, such as filters, oscillators, and power supplies.\\
+
+Traditionally, the RC circuit response is analyzed using theoretical models and simulations. However, hardware implementation using microcontrollers provides a more practical and hands-on approach to understanding the RC circuit behavior.\\
+
+This project aims to investigate the RC circuit response using the ESP32 microcontroller. The ESP32's built-in analog-to-digital converter (ADC) and pulse width modulation (PWM) capabilities make it an ideal platform for measuring and analyzing the RC circuit response. By using the ESP32 to capture and process the RC circuit's transient behavior, this project seeks to provide a comprehensive understanding of the RC circuit response and its applications in real-world electronic systems.\\
+
+\subsubsection{Objectives}
+\begin{itemize}
+    \item Learn to design and implement a hardware setup using ESP32 microcontroller to measure and capture the RC Circuit's transient response.
+     \item To compare the experimental results with theoretical models and simulations to validate the accuracy of the measurements.
+     \item To demonstrate the application of the ESP32 microcontroller in measuring and analyzing the RC circuit response, highlighting its potential in educational and research settings.
+\end{itemize}
+
+\subsection{System Design and Implementation}
+
+This section details the hardware and software components of the RC Circuit Response measurement system. The design approach, choice of components, and implementation steps are explained in the following subsections.\\
+
+\subsubsection{Hardware Components\\}
+
+The system consists of several hardware components that work together to measure the output voltage of RC Circuit, to verify the Transient Response of RC Circuit we used these components:\\
+
+\subsubsubsection{  i. ESP32 Microcontroller: }\\
+The ESP32 is chosen as the central processing unit due to its dual-core processor, built- in Wi-Fi and Bluetooth connectivity, and extensive GPIO capabilities. It enables real-time processing of sensor data and implementation of control algorithms. It has some ADC (Analog to Digital Converter) pins using which we can measure the precise values of voltages.\\
+
+\subsubsubsection{  ii. Bread-Board: }\\
+A breadboard is a reusable platform for prototyping electronic circuits with a grid of holes and copper strips.\\
+
+\subsubsubsection{  iii. RC Circuit:}\\
+An RC circuit consists of a resistor (R) and capacitor (C) connected in series, storing energy and controlling voltage and current flow in electronic circuits, filtering frequencies and regulating signal transmission and processing.\\\\
+
+
+
+\subsubsection{Software Implementation}
+The software implementation includes writing and executing the microPython code to record the Charging time response of the RC Circuit into a .txt file.\\
+Further, we have used Python programming to convert the data into .csv file and plot the data to visualise the Transient Response.\\
+
+\subsubsubsection{i. Algorithm  }\\
+The followings are the steps of the algorithm : \\
+\begin{itemsize}
+    \item \textbf{  1) Reading Analog values of voltage through ADC pin:} The ESP32 reads output voltage in digital format through the ADC pin of the ESP32, with the resolution of 12 Bits.
+    \item \textbf{  2) Calculation of the Analog Voltage:} The ESP32 represents the 0 to 3.3 voltage in the range of 0 to 4095. The microPython code converts the numeric value into 0 to 3.3V range.
+    \item \textbf{  3) Recording the data using python List:} After each sleep-time interval, the ESP32 reads the voltage. The time-stamp is calculated using "time.py" library. For each time, the voltage value and the time-stamp is appended into the list to collect the data.
+    \item \textbf{  4) Creating the data file :} Each data is appended into a .txt file. After saving the .txt file, using python programming, we convert the data into .csv file.
+    \item \textbf{  5) Plotting the data :} Using the libraries "numpy", "pandas" and "matplotlib" we plotted the data with the reference point of theoretical voltage at time-constant.
+\end{itemsize}
+
+\subsubsubsection{\textbf{\\ii. MicroPython Program for data reading: }}\\
+
+\begin{verbatim}
+import time
+import machine
+from machine import Pin
+
+# Setup ADC pin (Example: Pin 34 for ESP32 or Pin 
+36 for ESP8266)
+adc_pin = machine.Pin(34)  # Modify this as per 
+your hardware
+adc = machine.ADC(adc_pin)
+led = Pin(2, Pin.OUT)
+# Assuming 3.3V reference and 12-bit 
+ADC (range 0-4095)
+
+adc.width(machine.ADC.WIDTH_12BIT)  
+# 12-bit resolution
+adc.atten(machine.ADC.ATTN_0DB)  
+# 0dB attenuation (0 to 3.3V range)
+
+# Create an empty list to store time and voltage 
+readings data = []
+
+# Collect data for 10 seconds
+start_time = time.time()
+
+for i in range(2000):  # Collect 500 samples
+    # Read ADC value
+    led.on()
+    adc_value = adc.read()
+    
+    # Convert ADC value to voltage 
+(scaled to 3.3V for 12-bit resolution)
+    voltage = adc_value * (3.3 / 4095)
+    
+    # Record the current time and 
+voltage (in milliseconds)
+    elapsed_time = (time.time() - start_time)
+* 1000  # Convert to milliseconds
+    data.append((elapsed_time, voltage))
+    
+    # Print the timestamp and voltage to 
+the serial monitor
+    print(f"Timestamp: {elapsed_time:.2f} 
+ms, Voltage: {voltage:.4f} V")
+    
+    # Wait for 0.1 second before next
+reading time.sleep(0.1)
+
+# Save data to a file (Optional)
+with open('adc_data.txt', 'w') as f:
+    for timestamp, voltage in data:
+        f.write(f"{timestamp}, 
+{voltage}\n")
+
+print("Data collection complete!")
+led.off()
+\end{verbatim}\\
+
+\subsubsubsection{\textbf{iii. Python Program for data Plotting: }}\\
+
+\begin{verbatim}
+from google.colab import files
+uploaded = files.upload()
+
+# Access the uploaded file
+filename = 'adc_data-1.txt'
+with open(filename, 'r') as file:
+    content = file.read()
+
+print(content)  # Print the content 
+of the file
+
+import csv
+
+# Input and output file paths
+txt_filename = 'adc_data-1.txt'  
+# Replace with your actual txt file
+csv_filename = 'output_file.csv'  
+
+with open(txt_filename, 'r')
+as txt_file:
+    lines = txt_file.readlines() 
+
+with open(csv_filename, 'w', 
+newline='') 
+as csv_file:
+    writer = csv.writer(csv_file)
+
+    for line in lines:
+        row = line.split()  
+        writer.writerow(row)
+
+print(f"Text file has been successfully 
+converted to {csv_filename}")
+
+
+\end{verbatim}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.35\textwidth]{imgi.jpg}
+    \caption{(Data collection and Hardware Setup )}
+    \label{Setup}
+\end{figure}
+\vspace{0.5cm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.15\textwidth]{circuit.jpg}
+    \caption{(Circuit Diagram for RC Transient Analysis)}
+    \label{Diagram}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.35\textwidth]{RC Charging Plot using ESP32.png}
+    \caption{(RC Transient Plot)}
+    \label{Plot}
+\end{figure}
+
+\subsubsubsection{\textbf{iv. MicroPython Program for Data Reading:}}
+
+\begin{verbatim}
+import machine
+import time
+import os
+
+# Initialize ADC on GPIO34
+adc = machine.ADC(machine.Pin(34))
+adc.atten(machine.ADC.ATTN_11DB) 
+adc.width(machine.ADC.WIDTH_12BIT) 
+
+# Define file path
+file_path = "/discharge_data.txt"
+
+# Remove existing file if needed
+if file_path in os.listdir("/"):
+    os.remove(file_path)
+
+# Open file for writing ADC data
+file = open(file_path, "w")
+file.write("Time (s), Voltage (V)\n")  
+
+start_time = time.time()
+min_voltage = 0.1  
+
+try:
+    while True:
+ raw_value = adc.read()
+ voltage = (raw_value / 4095) * 3.3 
+ elapsed_time = time.time() - start_time 
+print(f"{elapsed_time:.2f},{voltage:.3f}")
+
+  
+  file.write(f"{elapsed_time:.2f}, 
+  {voltage:.3f}\n")
+file.flush()
+ if voltage <= min_voltage:  
+  print("Capacitor discharged! Stopping...")
+  break
+
+ time.sleep(0.5) 
+
+ print("Data successfully stored in")
+
+except KeyboardInterrupt:
+    print("Logging stopped manually.")
+finally:
+    file.close() 
+
+# Confirm stored data
+print("Checking stored data...")
+try:
+    with open(file_path, "r") as file:
+        print(file.read())
+except Exception as e:
+    print("Error reading file:", e)
+\end{verbatim}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.35\textwidth]{Capacitor-discharging-graph.png}
+    \caption{(RC discharge Plot)}
+    \label{Plot}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.25\textwidth]{discharge circuit.jpg}
+    \caption{(RC discharge circuit)}
+    \label{Plot}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.25\textwidth]{WhatsApp Image 2025-03-08 at 15.59.55_00e9f25e.jpg}
+    \caption{(hardware and software simulation)}
+    \label{Plot}
+\end{figure}
+\section{Conclusion}
+The servo motor control system using ESP32 successfully demonstrated precise control and RC transient output measurement. Python programming enabled efficient data analysis and visualization. This project showcases the potential of ESP32 in control systems and IoT applications, offering a solid foundation for future developments.
+
+
+\section*{References}
+[1] \href{https://controltheorymaster.files.wordpress.com/2017/11/farid-golnaraghi-benjamin-c-kuo-automatic-control-systems.pdf}{Farid Golnaraghi and Benjamin C. Kuo, "Automatic Control System"}
+
+[2] \href{https://wokwi.com/projects/423853993504460801}{"www.wokwi.com", ESP32 Simulation}
+
+[3] \href{https://www.upesy.com/blogs/tutorials/esp32-servo-motor-sg90-on-micropython}{"www.upesy.com", Using a servo motor with an ESP32 board in MicroPython}
+
+[4] \href{https://www.upesy.com/blogs/tutorials/rotary-encoder-esp32-on-micro-python}{"www.upesy.com", Using a rotary encoder in MicroPython with an ESP32}
+
+[5] \href{https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electronics/DC_Electrical_Circuit_Analysis_-_A_Practical_Approach_(Fiore)/08%3A_Capacitors/8.4%3A_Transient_Response_of_RC_Circuits}{Transient Response of RC Circuits, "eng.libretexts.org"}
+
+\end{document}
