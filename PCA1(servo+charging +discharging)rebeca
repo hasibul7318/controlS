@@ -541,5 +541,15 @@ The servo motor control system using ESP32 successfully demonstrated precise con
 [4] \href{https://www.upesy.com/blogs/tutorials/rotary-encoder-esp32-on-micro-python}{"www.upesy.com", Using a rotary encoder in MicroPython with an ESP32}
 
 [5] \href{https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electronics/DC_Electrical_Circuit_Analysis_-_A_Practical_Approach_(Fiore)/08%3A_Capacitors/8.4%3A_Transient_Response_of_RC_Circuits}{Transient Response of RC Circuits, "eng.libretexts.org"}
-
+\begin{figure}[H]
+    \centering{}
+\begin{figure}
+        \centering
+        \includegraphics[width=0.5\linewidth]{WhatsApp Image 2025-03-08 at 16.45.10_95f0ea01.jpg}
+        
+        \label{fig:enter-label}
+    \end{figure}
+        \caption{(Scan Me Please!)}
+    \label{Plot}
+\end{figure}
 \end{document}
